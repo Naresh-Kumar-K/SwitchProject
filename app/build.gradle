@@ -1,6 +1,9 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'kotlin-parcelize'
 }
 
 android {
@@ -45,4 +48,23 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
+    // Retrofit
+    implementation'com.squareup.retrofit2:retrofit:2.5.0'
+
+    // GSON
+    implementation'com.squareup.retrofit2:converter-gson:2.5.0'
+
+    // Room
+    implementation 'androidx.room:room-common:2.5.0'
+    implementation 'androidx.room:room-ktx:2.5.0'
+    implementation 'androidx.room:room-runtime:2.5.0'
+    androidTestImplementation 'androidx.room:room-testing:2.5.0'
+    kapt("androidx.room:room-compiler:2.5.0")
+
+    //Coroutine
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.0"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.6.0"
+    implementation "androidx.lifecycle:lifecycle-common:2.6.0"
+    implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
 }
