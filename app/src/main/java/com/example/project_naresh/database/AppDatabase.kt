@@ -1,10 +1,10 @@
-package com.example.project_naresh.room_database
+package com.example.project_naresh.database
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.project_naresh.File
+import com.example.project_naresh.data.File
 
 
 @Database(entities = [File::class], version = 1)
@@ -20,7 +20,6 @@ abstract class AppDatabase: RoomDatabase() {
 
             if(tempInstant != null){
                 return tempInstant
-
             }
             synchronized(this){
                 val instant = Room.databaseBuilder(

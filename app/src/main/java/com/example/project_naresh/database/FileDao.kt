@@ -1,8 +1,8 @@
-package com.example.project_naresh.room_database
+package com.example.project_naresh.database
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.example.project_naresh.File
+import com.example.project_naresh.data.File
 
 
 @Dao

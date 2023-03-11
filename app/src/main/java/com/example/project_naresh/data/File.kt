@@ -1,4 +1,4 @@
-package com.example.project_naresh
+package com.example.project_naresh.data
 
 import android.os.Parcel
 import android.os.Parcelable

@@ -1,14 +1,15 @@
-package com.example.project_naresh
+package com.example.project_naresh.main
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.project_naresh.data.File
 import com.example.project_naresh.databinding.ListItemBinding
 import java.text.SimpleDateFormat
 import java.util.*
 
-class UserRecyclerAdapter(private var userList: List<File> = mutableListOf()) : RecyclerView.Adapter<UserRecyclerAdapter.NewHolder>() {
-
+class FileListAdapter(private var userList: List<File> = mutableListOf())
+    : RecyclerView.Adapter<FileListAdapter.NewHolder>() {
 
      var onClickListener:((File) -> Unit)? = null
 
@@ -23,7 +24,7 @@ class UserRecyclerAdapter(private var userList: List<File> = mutableListOf()) : 
         }
         private fun getDateTime(s: String): String? {
             return try {
-                val sdf = SimpleDateFormat("MM/dd/yyyy", Locale.getDefault())
+                val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
                 val netDate = Date(s.toLong() * 1000)
                 sdf.format(netDate)
             } catch (e: Exception) {

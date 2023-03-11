@@ -1,21 +1,24 @@
-package com.example.project_naresh
+package com.example.project_naresh.updatedelete
 
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import com.example.project_naresh.data.File
+import com.example.project_naresh.R
 import com.example.project_naresh.databinding.ActivityUpdateDeleteBinding
+import com.example.project_naresh.main.EXTRA_DATA
 
 class UpdateDeleteActivity : AppCompatActivity() {
 
-    lateinit var viewModel: UpdateDeleteViewModel
+    private lateinit var viewModel: UpdateDeleteViewModel
     private var std: File? = null
-    lateinit var binding: ActivityUpdateDeleteBinding
+    private lateinit var binding: ActivityUpdateDeleteBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProvider(this)[UpdateDeleteViewModel::class.java]
-        binding = DataBindingUtil.setContentView(this,R.layout.activity_update_delete)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_update_delete)
         std = intent.getParcelableExtra(EXTRA_DATA)
 
         binding.apply {
