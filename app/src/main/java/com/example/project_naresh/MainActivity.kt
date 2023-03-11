@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.project_naresh.databinding.ActivityMainBinding
 import retrofit2.Call
@@ -29,19 +28,18 @@ class MainActivity : AppCompatActivity() {
             .create(ApiInterface::class.java)
 
         val retrofitData = retrofitBuilder.getData()
-        retrofitData.enqueue(object : Callback<LiveData<File>?> {
+        retrofitData.enqueue(object : Callback<ApiResponse?> {
             override fun onResponse(
-                call: Call<LiveData<File>?>,
-                response: Response<LiveData<File>?>,
+                call: Call<ApiResponse?>,
+                response: Response<ApiResponse?>,
             ) {
                 val responseBody = response.body()!!
                 binding.rvOne.layoutManager = LinearLayoutManager(this@MainActivity)
-                adapter = UserRecyclerAdapter(responseBody as ArrayList<File>)
-                Log.d("adapter", adapter.toString())
+                binding.rvOne.setHasFixedSize(true)
+                adapter = UserRecyclerAdapter(responseBody.files)
                 binding.rvOne.adapter = adapter
             }
-
-            override fun onFailure(call: Call<LiveData<File>?>, t: Throwable) {
+            override fun onFailure(call: Call<ApiResponse?>, t: Throwable) {
                 Log.d("This", "Failure".plus(t.message))
             }
         })

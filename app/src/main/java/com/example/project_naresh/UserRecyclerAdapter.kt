@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.project_naresh.databinding.ListItemBinding
 
-class UserRecyclerAdapter(private var userList: ArrayList<File>) : RecyclerView.Adapter<UserRecyclerAdapter.NewHolder>() {
+class UserRecyclerAdapter(private var userList: List<File>) : RecyclerView.Adapter<UserRecyclerAdapter.NewHolder>() {
 
     class NewHolder(private var bind: ListItemBinding) : RecyclerView.ViewHolder(bind.root) {
 

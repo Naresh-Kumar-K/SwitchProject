@@ -12,5 +12,7 @@ data class File(
     val sha1: String,
     val size: String,
     val source: String,
-    val summation: String
+    val summation: String,
 )
+
+data class ApiResponse(val files: List<File>)
