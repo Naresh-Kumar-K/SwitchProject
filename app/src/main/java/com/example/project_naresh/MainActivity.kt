@@ -1,22 +1,15 @@
 package com.example.project_naresh
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.room.PrimaryKey
 import com.example.project_naresh.databinding.ActivityMainBinding
-import kotlinx.coroutines.launch
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
-var BASE_URL = "https://archive.org/metadata/"
+const val BASE_URL = "https://archive.org/metadata/"
+const val EXTRA_DATA = "data"
 
 class MainActivity : AppCompatActivity() {
 
@@ -29,14 +22,18 @@ class MainActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-        viewModel.fileList.observe(this) {
+        viewModel.fileList.observe(this) { list ->
             binding.rvOne.layoutManager = LinearLayoutManager(this@MainActivity)
             binding.rvOne.setHasFixedSize(true)
-            adapter = UserRecyclerAdapter(it)
+            adapter = UserRecyclerAdapter(list)
             binding.rvOne.adapter = adapter
+            adapter.onClickListener = { file ->
+                val intent = Intent(this, UpdateDeleteActivity::class.java)
+                intent.putExtra(EXTRA_DATA, file)
+                startActivity(intent)
+            }
         }
     }
-
 
 
 }

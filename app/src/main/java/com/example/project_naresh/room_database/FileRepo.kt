@@ -1,5 +1,6 @@
 package com.example.project_naresh.room_database
 
+import android.app.Application
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
@@ -13,16 +14,11 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class FileRepo(private val fileDao: FileDao) {
+class FileRepo private constructor(private val fileDao: FileDao) {
     val fileList: LiveData<List<File>> = fileDao.getAllFiles()
 
     init {
         fetchData()
-        fileList.observeForever(object : Observer<List<File>?> {
-            override fun onChanged(value: List<File>?) {
-                Log.d("Repo", "onChanged: ${value?.size}")
-            }
-        })
     }
     suspend fun addData(file: File) {
         fileDao.addFile(file)
@@ -62,5 +58,16 @@ class FileRepo(private val fileDao: FileDao) {
                 Log.d("This", "Failure".plus(t.message))
             }
         })
+    }
+
+    companion object {
+        private var instance : FileRepo? = null
+        fun getRepoInstance(application: Application): FileRepo {
+            if(instance == null) {
+                val fileDao = AppDatabase.getDatabase(application).getDataDao()
+                instance = FileRepo(fileDao)
+            }
+            return instance!!
+        }
     }
 }
